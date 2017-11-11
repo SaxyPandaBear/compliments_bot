@@ -20,3 +20,11 @@ To interact with the bot, commands have a prefix of `!waifu`
 `!waifu compliment me` will make the bot give a random compliment to the message sender.
 
 `!waifu compliment @someone` will make the bot give a random compliment to the specified user. This assumes that the user exists
+
+The format for the `compliments.txt` file expects individual compliments to be on separate lines (see example template)
+```text
+Foo
+Bar
+Baz
+```
+Where "Foo", "Bar", and "Baz" are all separate compliments
