@@ -152,6 +152,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 // function that handles a new member event
 // When a member joins the server (GuildMemberAdd event), greet the user.
+// TODO: check the order of channels when a new user joins
 func onNewMember(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 	guild, err := s.Guild(m.GuildID)
 	if err != nil {
@@ -163,7 +164,6 @@ func onNewMember(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 	for i := 0; i < len(channels); i++ {
 		fmt.Printf("Channel %d = %s", i, channels[i])
 	}
-	return
 }
 
 // function that returns a string that explains the bot's compliment usage
