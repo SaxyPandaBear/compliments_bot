@@ -159,11 +159,24 @@ func onNewMember(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		fmt.Println("error getting server", err)
 		return
 	}
-	channels := guild.Channels
-	// just check to see if channels list is in order
-	for i := 0; i < len(channels); i++ {
-		fmt.Printf("Channel %d = %s", i, channels[i])
+	if len(guild.Channels) < 1 {
+		fmt.Println("no channels found")
+		return
 	}
+	var channel *discordgo.Channel = nil // we want to get the first channel whose Type is 1, a text chat
+	// we want the first text channel because Discord defines this as the "Default" channel now.
+	channels := guild.Channels
+	for i := 0; i < len(channels); i++ {
+		if channels[i].Type == discordgo.ChannelTypeGuildText {
+			channel = channels[i]
+			break
+		}
+	}
+	if channel == nil {
+		fmt.Println("no text channel found")
+		return
+	}
+	s.ChannelMessageSend(channel.ID, fmt.Sprintf("Hello, Master %s", m.User.Mention()))
 }
 
 // function that returns a string that explains the bot's compliment usage
