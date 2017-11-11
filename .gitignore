@@ -1,0 +1,9 @@
+.idea
+bin
+pkg
+src
+
+# file hides our client token for Discord
+discord_token.json
+
+compliments.txt
