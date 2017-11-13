@@ -7,7 +7,6 @@ import (
 	"math/rand"
 	"os"
 	"os/signal"
-	"path/filepath"
 	"strings"
 	"syscall"
 
@@ -20,8 +19,10 @@ type Auth struct {
 
 func init() {
 	// read the token from the json blob "discord_token.json"
-	absPath, _ := filepath.Abs("discord_token.json") // for some reason, it can't read the relative file
-	file, err := os.Open(absPath)
+	// https://stackoverflow.com/questions/33885208/golang-os-open-no-such-file-or-directory-error
+	// found out that the directory where the executable is invoked is imperative for correct execution
+	// of Golang code
+	file, err := os.Open("discord_token.json")
 	if err != nil {
 		fmt.Println("error reading file", err)
 		os.Exit(1)
