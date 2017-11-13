@@ -109,6 +109,7 @@ func main() {
 	<-sc
 
 	// Cleanly close down the Discord session.
+	close(sc)
 	fmt.Println("\nBot is now closing.")
 	dg.Close()
 }
