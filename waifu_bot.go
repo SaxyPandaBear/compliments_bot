@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"strings"
 	"syscall"
 
@@ -19,12 +20,13 @@ type Auth struct {
 
 func init() {
 	// read the token from the json blob "discord_token.json"
-	file, err := os.Open("discord_token.json")
+	absPath, _ := filepath.Abs("discord_token.json") // for some reason, it can't read the relative file
+	file, err := os.Open(absPath)
 	if err != nil {
 		fmt.Println("error reading file", err)
 		os.Exit(1)
 	}
-	bytes := make([]byte, 1000 ) // TODO: not sure how many bytes I need to read in total yet
+	bytes := make([]byte, 100)
 	count, err := file.Read(bytes) // read bytes of file into bytes array
 	if err != nil {
 		fmt.Println("error reading file", err)
